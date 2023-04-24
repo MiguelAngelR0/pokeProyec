@@ -1,0 +1,58 @@
+<div class="container  align-items-center mt-5 p-5 caja">
+
+    <div class="row ">
+
+        <div class="col">
+          
+
+            <!-- Cabecera de la tarjeta -->
+            <mat-card-header>
+                <mat-card-title>
+                    <h3 class="title">Login</h3>
+                </mat-card-title>
+                <mat-card-subtitle class="sub">
+                    Accede a tu cuenta
+                </mat-card-subtitle>
+            </mat-card-header>
+        </div>
+
+    </div>
+    <!-- Contenido de tarjeta -->
+    <!-- <mat-card-content> -->
+    <!-- Formulario de login -->
+    <!-- <form [formGroup]="loginForm" (submit)="submitLogin()"> -->
+    <div class="row container-fluid d-flex justify-content-center mt-4">
+        <form [formGroup]="loginForm" (submit)="submitLogin()">
+            <!-- Email -->
+            <mat-form-field class="d-flex">
+                <mat-label>Email</mat-label>
+                <input class="d-flex" name="email" matInput placeholder="Email" formControlName="email">
+                <mat-error *ngIf="email?.errors?.['required'] && email?.touched">
+                    El campo email es obligatorio
+                </mat-error>
+                <mat-error *ngIf="email?.errors?.['email'] && email?.touched">
+                    El formato email no es correcto
+                </mat-error>
+            </mat-form-field>
+    
+            <!-- Password -->
+            <mat-form-field class="d-flex">
+                <mat-label>password</mat-label>
+                <input type="password" matInput placeholder="Password" formControlName="password">
+                <mat-error *ngIf="password?.errors?.['required'] && password?.touched">
+                        El campo password es obligatorio
+                    </mat-error>
+            </mat-form-field>
+            <!-- boton submit  (deshabilitado si el form es invalido)-->
+            <div class="d-flex justify-content-between">
+                <button class="w-25" type="submit" mat-raised-button color="accent" [disabled]="loginForm.invalid">Login</button>
+                <button class="w-25"  mat-raised-button [routerLink]="['/register']" color="accent">Register</button>
+            </div>
+           
+        </form>
+        
+    </div>
+  
+   
+</div>
+

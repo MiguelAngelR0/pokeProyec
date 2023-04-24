@@ -1,0 +1,168 @@
+@use '@angular/material' as mat;
+@use 'sass:map';
+@include mat.core();
+
+// GAMA COLORES
+ //botone scopiados
+// {
+//   "Primary": {
+    //  "50": "#f4e3f0",
+    // "100": "#e3badb",
+    // "200": "#d08cc4",
+    // "300": "#bc5dac",
+    // "400": "#ad399c",
+    // "500": "#9d0d8c",
+    // "600": "#910887",
+    // "700": "#800080",
+    // "800": "#710078",
+    // "900": "#55006b"
+//   },
+//   "Complementary": {
+//     "50": "#e7f6e6",
+//     "100": "#c6e7c1",
+//     "200": "#a0d899",
+//     "300": "#78c96f",
+//     "400": "#58be4e",
+//     "500": "#35b228",
+//     "600": "#2aa31f",
+//     "700": "#199111",
+//     "800": "#008000",
+//     "900": "#006100"
+//   },
+//   "Analogous - 1": {
+//     "50": "#f2e3f3",
+//     "100": "#deb9e2",
+//     "200": "#c88bd0",
+//     "300": "#b25dbd",
+//     "400": "#a139b0",
+//     "500": "#910da2",
+//     "600": "#830b9d",
+//     "700": "#710795",
+//     "800": "#60038d",
+//     "900": "#400080"
+//   },
+//   "Analogous - 2": {
+//      "50": "#fbe3e9",
+//     "100": "#f6b8c8",
+//     "200": "#f08aa5",
+//     "300": "#e95c81",
+//     "400": "#e33968",
+//     "500": "#dd164f",
+//     "600": "#cd124d",
+//     "700": "#b80d4a",
+//     "800": "#a40746",
+//     "900": "#800040"
+//   },
+//   "Triadic - 1": {
+//     "50": "#f8e6e8",
+//     "100": "#edc1c4",
+//     "200": "#d18885",
+//     "300": "#bb5c58",
+//     "400": "#bc3a33",
+//     "500": "#b92617",
+//     "600": "#ac1c17",
+//     "700": "#9c1313",
+//     "800": "#8f0b0c",
+//     "900": "#800000"
+//   },
+//   "Triadic - 2": {
+//     "50": "#f8fde7",
+//     "100": "#edf8c4",
+//     "200": "#e1f59d",
+//     "300": "#d5f075",
+//     "400": "#cceb56",
+//     "500": "#c4e834",
+//     "600": "#b8d52d",
+//     "700": "#a8be23",
+//     "800": "#99a719",
+//     "900": "#808000"
+//   }
+// }
+
+
+//*defino el mio--------
+$custom-primary-map: (
+    50 : #f4e3f0,
+    100 :#e3badb,
+    200 :#d08cc4,
+    300 :#bc5dac,
+    400 :#ad399c,
+    500 :#9d0d8c,
+    600 :#910887,
+    700 :#800080,
+    800 :#710078,
+    900 :#55006b,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+    )
+);
+
+$custom-secondary-map: (
+    50 : #fbe3e9,
+    100 :#f6b8c8,
+    200 :#f08aa5,
+    300 :#e95c81,
+    400 :#e33968,
+    500 :#dd164f,
+    600 :#cd124d,
+    700 :#b80d4a,
+    800 :#a40746,
+    900 :#800040,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+    )
+);
+
+
+
+$my-primary: mat.define-palette($custom-primary-map,700);
+$my-accent: mat.define-palette($custom-secondary-map,900);
+
+// The "warn" palette is optional and defaults to red if not specified.
+$my-warn: mat.define-palette(mat.$red-palette);
+
+//*mod
+$my-theme: mat.define-light-theme((
+ color: (
+   primary: $my-primary,
+   accent: $my-accent,
+   warn: $my-warn,
+ ),
+ typography: mat.define-typography-config(),
+ density: 0,
+));
+
+@include mat.core-theme($my-theme);
+
+// Emit styles for MatButton based on `$my-theme`. Because the configuration
+// passed to `define-light-theme` omits typography, `button-theme` will not
+// emit any typography styles.
+
+
+// @include mat.button-theme($my-theme);
+//Alternativa para n o tener que ir componente por componente
+@include mat.all-component-themes($my-theme);
+
+// REEMPLAZA EN ANGULAR.JSON -> STYLES
+// "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+// POR LA RUTA DEL CUSTOM THEME
+// "src/assets/styles/my-theme.scss",
+

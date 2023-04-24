@@ -1,0 +1,37 @@
+// @import '~@angular/material/theming';
+
+// $my-palette: (
+//   50: #e9f6f4,
+//   100: #c7e7e0,
+//   200: #a3d6cb,
+//   300: #7fc4b6,
+//   400: #5bb3a1,
+//   500: #3e8c7d,
+//   600: #2e6a60,
+//   700: #1f483f,
+//   800: #0f2620,
+//   900: #001400
+// );
+
+// $my-theme: mat.define-palette($my-palette, 500, 300, 700);
+
+// $my-theme: mat.define-theme(
+//   $my-palette,
+//   $my-theme
+// );
+
+:root {
+  --background-color: #264653;
+  --color-option-1: #2a9d8f;
+  --color-option-2: #e9c46a;
+  --color-option-3: #f4a261;
+  --color-option-4: #e76f51;
+  --text-color: white;
+  --button-background: var(--color-option-3);
+ }
+ body {
+  background-color: var(--background-color);
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+ }
