@@ -14,6 +14,8 @@ import { AuthServicePhp } from 'src/app/services/auth-service-php.service';
 })
 export class LoginFormComponent implements OnInit {
 
+  
+
   loginForm: FormGroup = new FormGroup({})//se trata al login como un obj
 
   @Output() loginAction: EventEmitter<unknown> = new EventEmitter<unknown>();//emitimos el obj=los valores de nuestro formulario ponia any envez de unkown
@@ -27,7 +29,10 @@ export class LoginFormComponent implements OnInit {
       password: ['', Validators.required]
     });
     
-    
+    if(sessionStorage.getItem('token')){
+
+    }
+
   }
 
   get email(){
@@ -49,7 +54,7 @@ export class LoginFormComponent implements OnInit {
 
       this.authService.login(this.loginForm.value.email,this.loginForm.value.password).subscribe(
         (response) => {
-          console.log("Valor del authService " + response.otroValor)
+          
         },
         (error) => {
           // hacer algo con el error del servicio si es necesario

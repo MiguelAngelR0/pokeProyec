@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthServicePhp } from 'src/app/services/auth-service-php.service';
 import { Router } from '@angular/router';
+import { IUser } from 'src/app/models/user.interface';
 
 @Component({
   selector: 'app-login-page',
@@ -8,15 +9,20 @@ import { Router } from '@angular/router';
   styleUrls: ['./loginWall.component.scss']
 })
 export class LoginPageComponent {
+  
+  user: IUser | undefined;
 
 
   constructor( private authService: AuthServicePhp,private router: Router){}
 
   ngOnInit(): void {
 
+    
+
+    //Si ya esta el token logueado carga la home
     const token = sessionStorage.getItem('token');
 
-    if (token) { //Si ya esta el token logueado carga la home
+    if (token) { 
       this.router.navigate(['home']);
     }
 
@@ -30,24 +36,22 @@ export class LoginPageComponent {
 
     const {email, password} = value;
 
-    console.log('esto me llega del componente hijo login form: '+ value.email)
-    console.log('esto me llega del componente hijo login form: '+ value.password)
-
-
-
     this.authService.login(email, password).subscribe(
       (response) => { //nos susbcribimos a la respuesta, y si todo ha ido bien 
         console.table(response)
-        console.log("Esta es la respuesta Mensaje " + response.mensaje)
-        console.log("Esta es la respuesta Array: " + response.otroValor)
-        console.log("Esta el usu?: "+ response.exito)
+        
+        this.user = response;
+        
+        sessionStorage.setItem("user",JSON.stringify(this.user));
 
-
-        if(response.token){
+        if(response.exito || response.token){ //permite a dashboard acceder sin login al tener ya el login 
           sessionStorage.setItem('token', response.token);
-          console.log("tengo respuesta")
-          // this.router.navigate(['/dashboard'])
+          this.router.navigate(['/dashboard']);
+          
+        }else{
+          console.log('no esta el usuario ingresado')
         }
+       
       },
       (error) => (console.error(`Ha habido un error al hacer login:`, JSON.stringify(error, null, 2)),
         () => console.info(`Peticion de login terminada`)

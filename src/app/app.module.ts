@@ -24,6 +24,7 @@ import { RegisterFormComponent } from './components/register-form/register-form.
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { HttpClientModule } from '@angular/common/http';
+import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { HttpClientModule } from '@angular/common/http';
     LoginPageComponent,
     RegisterPageComponent,
     RegisterFormComponent,
+    NotFoundPageComponent,
     
   ],
   imports: [

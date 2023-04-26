@@ -4,6 +4,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
+import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
+import { AuthGuardGuard } from './guards/auth-guard.guard';
 
 
 const routes: Routes = [
@@ -14,24 +16,31 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    component: LoginPageComponent,
-    pathMatch: 'full'
+    component: LoginPageComponent
   },
   {
     path: 'dashboard',
     component: DashboardComponent,
+    canActivate: [AuthGuardGuard],
     children: [
       {
-        path:'home',
+        path:'',
         component:HomeComponent,
+        canActivate: [AuthGuardGuard] // agregado aquí
       }
     ]
   },
   {
     path: 'register',
     component: RegisterPageComponent
-  }
+  },
+  // {
+  //   path: '**',//Si la ryta no coincide con ninguna de estas
+  //   component: NotFoundPageComponent
+  // }
+
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

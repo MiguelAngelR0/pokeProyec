@@ -26,7 +26,8 @@
             <!-- Email -->
             <mat-form-field class="d-flex">
                 <mat-label>Email</mat-label>
-                <input class="d-flex" name="email" matInput placeholder="Email" formControlName="email">
+                   
+                <input class="d-flex" name="email" matInput placeholder="Email" formControlName="email" >
                 <mat-error *ngIf="email?.errors?.['required'] && email?.touched">
                     El campo email es obligatorio
                 </mat-error>
