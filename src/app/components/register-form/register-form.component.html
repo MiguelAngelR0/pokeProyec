@@ -3,9 +3,6 @@
     <div class="row ">
 
         <div class="col">
-
-
-            <!-- Cabecera de la tarjeta -->
             <mat-card-header>
                 <mat-card-title>
                     <h3 class="title">Register</h3>
@@ -19,10 +16,8 @@
     </div>
     <!-- Contenido de tarjeta -->
     <!-- <mat-card-content> -->
-
-    <!-- <form [formGroup]="loginForm" (submit)="submitLogin()"> -->
     <div class="row container-fluid d-flex justify-content-center mt-4">
-        <form [formGroup]="registerForm">
+        <form [formGroup]="registerForm" (submit)="submitRegister()">
             <!-- Nombre -->
             <mat-form-field class="d-flex">
                 <mat-label>Nombre</mat-label>

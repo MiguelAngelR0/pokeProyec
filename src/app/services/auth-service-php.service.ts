@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
 import {Observable} from 'rxjs';
 
 @Injectable({
@@ -16,10 +15,23 @@ export class AuthServicePhp {
 
     const body = {
       email:email,
-      password: password,
+      password: password
     }
 
     return this.http.post('http://localhost/tfgPokemon/loginPoke.php',body);
   }
+
+  register(nombre:string,email:string, password:string): Observable<any>{
+
+    const body = {
+      nombre:nombre,
+      email:email,
+      password: password
+    }
+
+
+    return this.http.post('http://localhost/tfgPokemon/registerPoke.php',body);
+  }
+
 
 }

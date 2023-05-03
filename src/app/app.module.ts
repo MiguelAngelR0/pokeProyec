@@ -25,6 +25,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { HttpClientModule } from '@angular/common/http';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
+import { PokedexComponent } from './components/pokedex/pokedex.component';
+
+import { PokedexPageComponent } from './pages/pokedex-page/pokedex-page.component';
+
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { RouterModule } from '@angular/router';
+import { PokeDetailPageComponent } from './pages/poke-detail-page/poke-detail-page.component';
+import { PokeDetailComponent } from './components/poke-detail/poke-detail.component';
+import {MatChipsModule} from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -37,6 +48,10 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
     RegisterPageComponent,
     RegisterFormComponent,
     NotFoundPageComponent,
+    PokedexComponent,
+    PokedexPageComponent,
+    PokeDetailPageComponent,
+    PokeDetailComponent,
     
   ],
   imports: [
@@ -55,11 +70,16 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
     MatCardModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
-    
+    HttpClientModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    RouterModule,
+    MatChipsModule
     
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  
 })
 export class AppModule { }

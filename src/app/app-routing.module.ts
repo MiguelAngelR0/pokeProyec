@@ -6,13 +6,16 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { AuthGuardGuard } from './guards/auth-guard.guard';
+import { PokedexPageComponent } from './pages/pokedex-page/pokedex-page.component';
+import { PokeDetailPageComponent } from './pages/poke-detail-page/poke-detail-page.component';
 
 
 const routes: Routes = [
   {
     path: '', //ruta inicial
-    pathMatch: 'full',
-    redirectTo: 'dashboard'
+    component: LoginPageComponent
+    // pathMatch: 'full',
+    // redirectTo: 'dashboard'
   },
   {
     path: 'login',
@@ -27,23 +30,38 @@ const routes: Routes = [
         path:'',
         component:HomeComponent,
         canActivate: [AuthGuardGuard] // agregado aquí
-      }
+      },
+      {
+        path:'pokedex',
+        component:PokedexPageComponent,
+        canActivate: [AuthGuardGuard] 
+      },
+      {
+        path:'pokedetail/:id',
+        component:PokeDetailPageComponent,
+        canActivate: [AuthGuardGuard] 
+      },
+
     ]
   },
   {
     path: 'register',
     component: RegisterPageComponent
   },
-  // {
-  //   path: '**',//Si la ryta no coincide con ninguna de estas
-  //   component: NotFoundPageComponent
-  // }
+//  {
+//     path: '**',
+//     redirectTo: 'not-found'
+//   },
+//   {
+//     path: 'not-found',//Si la ryta no coincide con ninguna de estas
+//     component: NotFoundPageComponent
+//   }
 
 ];
 
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule ]
 })
 export class AppRoutingModule { }

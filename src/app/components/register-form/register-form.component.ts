@@ -11,7 +11,7 @@ export class RegisterFormComponent implements OnInit {
 
   registerForm: FormGroup = new FormGroup({});
 
-  @Output() loginAction: EventEmitter<unknown> = new EventEmitter<unknown>();//emitimos el obj=los valores de nuestro formulario ponia any envez de unkown
+  @Output() registerAction: EventEmitter<unknown> = new EventEmitter<unknown>();//emitimos el obj=los valores de nuestro formulario ponia any envez de unkown
 
   constructor(private formBuilder: FormBuilder) { }
 
@@ -26,7 +26,7 @@ export class RegisterFormComponent implements OnInit {
 
 
   get firstName() {
-    return this.registerForm.get('email')
+    return this.registerForm.get('firstName')
   }
 
   get password() {
@@ -42,12 +42,12 @@ export class RegisterFormComponent implements OnInit {
   }
 
 
-  submitLogin(){
+  submitRegister(){
     console.log(this.registerForm.valid)
     if(this.registerForm.valid){
       console.table(this.registerForm.value)
       //todo peticion a authService
-      this.loginAction.emit(this.registerForm.value);//Este es el valor que va a recibirse como evento en el loginAction
+      this.registerAction.emit(this.registerForm.value);//Este es el valor que va a recibirse como evento en el loginAction
      
     }
   }
