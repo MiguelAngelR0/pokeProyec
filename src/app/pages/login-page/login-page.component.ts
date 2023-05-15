@@ -23,7 +23,7 @@ export class LoginPageComponent {
     const token = sessionStorage.getItem('token');
 
     if (token) { 
-      this.router.navigate(['home']);
+      this.router.navigate(['dashboard']);
     }
 
   }

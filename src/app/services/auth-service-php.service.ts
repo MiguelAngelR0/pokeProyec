@@ -33,5 +33,47 @@ export class AuthServicePhp {
     return this.http.post('http://localhost/tfgPokemon/registerPoke.php',body);
   }
 
+  addPokeFav(id:string, name:string, pic:string,idUser:number){
+    
+    const body = {
+      id:id,
+      name:name,
+      pic: pic,
+      idUser:idUser
+    }
+
+
+    return this.http.post('http://localhost/tfgPokemon/addPokeFav.php',body);
+  }
+
+  deletePokeFav(id:string, name:string, pic:string,idUser:number){
+    
+    const body = {
+      id:id,
+      name:name,
+      pic: pic,
+      idUser:idUser
+    }
+
+
+    return this.http.post('http://localhost/tfgPokemon/deletePokeFav.php',body);
+  }
+  
+
+
+  getPokeFav(idUser:number){
+    
+    const body = {
+      idUser:idUser,
+      
+    }
+
+    return this.http.post('http://localhost/tfgPokemon/getPokemonFav.php',body);
+  }
+
+  getAllUsers(){
+    return this.http.get('http://localhost/tfgPokemon/getAllUsers.php');
+  }
+  
 
 }

@@ -5,8 +5,23 @@
         </div>
         <h1>puntosExp: {{user?.puntosExp}}</h1>
         <p>Fecha de creacion de la cuenta {{user?.createDate}}</p>
-        
 
+        <h3>lista pokemons favoritos</h3>
+        <ng-container *ngIf="pokemonsFav;else templateName"></ng-container>
+        <ul color="primary">
+            <li class="pokeFav mt-3 d-flex justify-content-around align-items-center"  *ngFor="let pf of pokemonsFav">
+                <img src="{{pf.pic}}" alt=""> {{pf.name}} {{pf.id}}
+
+                <button mat-icon-button (click)="toggleFavorite(pf)">
+                    <mat-icon>{{ pf.favorite? 'star_border' : 'star' }}</mat-icon>
+                </button>
+            </li>
+        </ul>
     </div>
-</div>
+    <ng-template #templateName>
+        <p>No tienes pokemons Favoritos</p>
+    </ng-template>
 
+
+
+</div>
