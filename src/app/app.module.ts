@@ -34,14 +34,16 @@ import {MatChipsModule} from '@angular/material/chips';
 
 import { ContactsDetailPageComponent } from './pages/contacts-detail-page/contacts-detail-page.component';
 import { ContactsDetailComponent } from './components/contacts-detail/contacts-detail.component';
-import { DrawComponent } from './components/draw/draw.component';
+
 
 
 import { MatFormFieldModule, MAT_FORM_FIELD_DEFAULT_OPTIONS }
  from '@angular/material/form-field';
-import { LoginFormModule } from './components/login-form/login-form.module';
+
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
+import { DrawPageComponent } from './pages/draw-page/draw-page.component';
+import { Draw2Component } from './components/draw2/draw2.component';
 
 // import { ContactsModule } from './modules/contacts.module';
  const myMatFormFieldDefaults = {
@@ -67,9 +69,11 @@ import { LoginFormComponent } from './components/login-form/login-form.component
     
     ContactsDetailPageComponent,
     ContactsDetailComponent,
-    DrawComponent,
+   
     LoginPageComponent,
-    LoginFormComponent
+    LoginFormComponent,
+   
+    
    
   ],
   imports: [
