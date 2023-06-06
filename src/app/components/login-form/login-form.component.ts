@@ -12,6 +12,7 @@ import { AuthServicePhp } from 'src/app/services/auth-service-php.service';
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.scss']
 })
+
 export class LoginFormComponent implements OnInit {
 
   
@@ -46,6 +47,7 @@ export class LoginFormComponent implements OnInit {
 
   submitLogin(){
     console.log(this.loginForm.valid)
+    
     if(this.loginForm.valid){
       console.table(this.loginForm.value)
       

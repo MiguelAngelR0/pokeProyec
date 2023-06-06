@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, AbstractControlOptions, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 
 
 @Component({
@@ -13,16 +13,40 @@ export class RegisterFormComponent implements OnInit {
 
   @Output() registerAction: EventEmitter<unknown> = new EventEmitter<unknown>();//emitimos el obj=los valores de nuestro formulario ponia any envez de unkown
 
-  constructor(private formBuilder: FormBuilder) { }
-
-  ngOnInit() {
+  constructor(private formBuilder: FormBuilder) {
+    
     this.registerForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', Validators.required],
-    });
+      confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
+    }, {validators : this.passwordsMatchValidator});
+
+
+   }
+
+
+   passwordsMatchValidator( formGroup: FormGroup){
+    
+    const password = formGroup.get('password')?.value;
+
+    const confirmPassword = formGroup.get('confirmPassword')?.value;
+
+    if (password !== confirmPassword) {
+      console.log('son distintos')
+      return { passwordsNotMatch: true };
+    } else {
+      console.log('son iguales')
+      return null;
+    }
   }
+
+  ngOnInit() {
+    console.log(this.registerForm)
+    
+  
+  }
+  
 
 
   get firstName() {
@@ -42,38 +66,18 @@ export class RegisterFormComponent implements OnInit {
   }
 
 
-  submitRegister(){
+  submitRegister() {
     console.log(this.registerForm.valid)
-    if(this.registerForm.valid){
+    if (this.registerForm.valid) {
       console.table(this.registerForm.value)
       //todo peticion a authService
       this.registerAction.emit(this.registerForm.value);//Este es el valor que va a recibirse como evento en el loginAction
-     
+
     }
   }
-  
 
-  //todo que funcione el confirmar
-  // matchValidator(field: string) {
-  //   //La clase AbstractControl proporciona una serie de métodos y propiedades comunes a los controles de formulario, como value, setValue(), patchValue(), reset(), markAsTouched(), markAsDirty(), y más.
-  //   //Estos métodos y propiedades se pueden utilizar en cualquier tipo de control de formulario, 
-  //   //independientemente de si es un control individual o un grupo de controles.
-  //   return (control: AbstractControl) => {
-  //     const fieldValue = control.value;
-  //     const matchingControl = control.root.get(field);
 
-  //     if (matchingControl && fieldValue !== matchingControl.value) {
-  //       return { match: true };
-  //     }
 
-  //     return null;
-  //   };
-  // }
-
-  // function MustMatch(arg0: string, arg1: string): any {
-  //   throw new Error('Function not implemented.');
-  // }
-  
 
 
 

@@ -1,0 +1,81 @@
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <mat-icon color="warn">favorite</mat-icon>
+                <mat-icon color="warn">favorite</mat-icon>
+                <mat-icon color="warn">favorite</mat-icon>
+            </div>
+            
+            
+        </div>
+
+        <div class="row mt-5">
+            <div class="col">
+                <div>
+                    <h1>Escoge un Pokemon: </h1>
+                    <div *ngIf="pokemon">
+                        <img class="" src="{{this.pokemon.sprites.front_default}}" alt="">
+                    </div>
+                    
+
+                    <p>Nunero de intentos: </p>
+                        <ng-container *ngIf="this.remainingAttempts>0; else noIntentos"> 
+                            <button mat-icon-button (click)="generarPokemonAleatorio()"  [disabled]="remainingAttempts <= 0"><mat-icon>sync</mat-icon></button> {{remainingAttempts}}
+
+                        </ng-container>
+                        <ng-template #noIntentos>
+                            <p>No hay intentos restantes.¡Vuelve Mañana!</p>
+                          </ng-template>
+                </div>
+            </div>
+        </div>
+        <div class="div" *ngIf="pokemon; else noHayPokemon">
+            <div class="row">
+                <div class="col">
+                    <h1>Escoge una dificultad:</h1>
+                </div>
+            </div>
+            
+            <div class="row mt-5">
+                <div class="col-4">
+                    <button mat-stroked-button color="primary" (click)="irABatalla(idPokemonsEasy,'e')">Facil</button>
+                    <p>+100 xp</p>
+                    <h5>Pokeomns con los que puedes enfrentarte:</h5>
+                    <ng-container *ngIf="pokemonListEasy">
+                        <ng-container *ngFor="let pokemon of this.pokemonListEasy; let i=index">
+                            <img class="pokemon-sprite" src="{{this.pokemon.sprites.front_default}}" alt="">
+                        </ng-container>
+                    </ng-container>
+                </div>
+                
+                <div class="col-4">
+                    <button mat-stroked-button color="accent" (click)="irABatalla(idPokemonsMed,'m')">Medio</button>
+                    <p>+250 xp</p>
+                    <h5>Pokeomns con los que puedes enfrentarte:</h5>
+                    <ng-container *ngIf="pokemonListMed">
+                        <ng-container *ngFor="let pokemon of this.pokemonListMed; let i=index">
+                            <img class="pokemon-sprite" src="{{this.pokemon.sprites.front_default}}" alt="">
+                        </ng-container>
+                    </ng-container>
+                </div>
+    
+                <div class="col-4">
+                    <button mat-stroked-button color="warn" (click)="irABatalla(idPokemonsH,'d')">Dificil</button>
+                    <p>+500 xp</p>
+                    <h5>Pokeomns con los que puedes enfrentarte:</h5>
+                    <ng-container *ngIf="pokemonListH">
+                        <ng-container *ngFor="let pokemon of this.pokemonListH; let i=index">
+                            <img class="pokemon-sprite" src="{{this.pokemon.sprites.front_default}}" alt="">
+                        </ng-container>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+        <ng-template #noHayPokemon>
+            Selecciona pokemon para luchar!
+        </ng-template>
+        
+    </div>
+    

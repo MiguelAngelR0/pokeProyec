@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div *ngIf="user">
+
+                <h1>Nombre usuario: {{user.name}}</h1>
+                <p>Puntos Experiencia: {{user.puntosExp}}</p>
+            
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col">
+            <p>Sus pokemons Favoritos:</p>
+            <ul color="primary">
+                <li class="pokeFav mt-3 d-flex justify-content-around align-items-center" *ngFor="let pf of pokemonsFav">
+                  <img src="{{pf.pic}}" alt=""> {{pf.name}} {{pf.id}}
+
+                </li>
+              </ul>
+        </div>
+    </div>
+</div>

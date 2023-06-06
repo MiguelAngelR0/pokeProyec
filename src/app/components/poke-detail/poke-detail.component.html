@@ -1,0 +1,36 @@
+<div class="container">
+    
+    <div class="row m-5">
+        <mat-card class="example-card">
+
+            <mat-card-header>
+                
+                  <img mat-card-md-image  src="{{this.pokeDetail?.sprites?.front_default}}"alt="">  
+                <mat-card-title-group>
+                    
+                    <mat-card-title>  <br> No.{{this.pokeDetail?.id}} <br> {{this.pokeDetail?.name | titlecase}}</mat-card-title>
+
+                </mat-card-title-group>
+
+            </mat-card-header>
+            <br>
+            <mat-card-content>
+                <p>Peso: {{this.pokeDetail?.weight}}</p>
+                <p>Altura: {{this.pokeDetail?.height}}</p>
+
+                <ul>
+                    <li *ngFor="let stat of pokeDetail?.stats">
+                        {{ stat.stat.name }}: {{ stat.base_stat }}
+                    </li>
+                </ul>
+
+                <mat-chip-listbox *ngFor="let type of pokeDetail?.types">
+                    <mat-chip-option color="primary" selected>{{ type.slot }} : {{ type.type.name | titlecase }} </mat-chip-option>
+                </mat-chip-listbox>
+
+            </mat-card-content>
+
+        </mat-card>
+    </div>
+
+</div>

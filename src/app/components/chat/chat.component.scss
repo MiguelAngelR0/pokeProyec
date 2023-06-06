@@ -1,0 +1,57 @@
+.container{
+    height: 100%;
+    min-height: 1rem;
+}
+
+.chatContainer{
+    padding: 2em;
+    width: 100%;
+    height: max-content;
+
+    min-width: 100%;
+    display: flex;
+    flex-direction:column;
+    padding-bottom: 20em;
+    background-color: ghostwhite;
+    overflow-y: scroll; /* Agrega scroll */
+    min-height: 60vh;
+    max-height: 60vh; /* Establece una altura máxima del 80% del viewport height */
+}
+
+.local{
+    padding:15px;
+    border-radius:1em;
+    background-color: darkcyan;
+    max-width: 85%;
+    color: white;
+    align-self: flex-start;
+   
+}
+
+.remoto{
+    padding:15px;
+    border-radius:1.5em;
+    background-color: darkgoldenrod;
+    max-width: 85%;
+    color: white;
+    align-self: flex-end;
+}
+
+.inputContainer{
+ background-color: ghostwhite;
+
+flex-grow: 1;
+
+
+}
+
+/* Agrega la clase 'scroll-bottom' al chatContainer para hacer que la barra de desplazamiento se mantenga en la parte inferior */
+.chatContainer.scroll-bottom {
+    height: calc(100% - 3rem); /* Resta la altura del inputContainer para que el contenedor de mensajes se ajuste a la altura disponible */
+    padding-bottom: 0;
+    overflow-y: auto; /* Usa 'auto' para que la barra de desplazamiento aparezca solo si es necesario */
+}
+
+.chatContainer.scroll-bottom > :last-child {
+    margin-bottom: 0; /* Quita el margen inferior del último elemento para que la barra de desplazamiento no lo oculte */
+}

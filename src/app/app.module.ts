@@ -32,8 +32,8 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
 import { RouterModule } from '@angular/router';
 import {MatChipsModule} from '@angular/material/chips';
 
-import { ContactsDetailPageComponent } from './pages/contacts-detail-page/contacts-detail-page.component';
-import { ContactsDetailComponent } from './components/contacts-detail/contacts-detail.component';
+
+
 
 
 
@@ -42,8 +42,9 @@ import { MatFormFieldModule, MAT_FORM_FIELD_DEFAULT_OPTIONS }
 
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
-import { DrawPageComponent } from './pages/draw-page/draw-page.component';
-import { Draw2Component } from './components/draw2/draw2.component';
+
+
+
 
 // import { ContactsModule } from './modules/contacts.module';
  const myMatFormFieldDefaults = {
@@ -57,24 +58,11 @@ import { Draw2Component } from './components/draw2/draw2.component';
     AppComponent,
     NavComponent,
     DashboardComponent,
-
-  
     RegisterPageComponent,
     RegisterFormComponent,
     NotFoundPageComponent,
-   
-
- 
-    ContactsDetailComponent,
-    
-    ContactsDetailPageComponent,
-    ContactsDetailComponent,
-   
     LoginPageComponent,
     LoginFormComponent,
-   
-    
-   
   ],
   imports: [
     BrowserModule,
@@ -96,10 +84,6 @@ import { Draw2Component } from './components/draw2/draw2.component';
     RouterModule,
     MatChipsModule,
     MatFormFieldModule,
-    
-   
-    // ContactsModule
-    
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -42,7 +42,6 @@ export class AuthServicePhp {
       idUser:idUser
     }
 
-
     return this.http.post('http://localhost/tfgPokemon/addPokeFav.php',body);
   }
 
@@ -73,6 +72,14 @@ export class AuthServicePhp {
 
   getAllUsers(){
     return this.http.get('http://localhost/tfgPokemon/getAllUsers.php');
+  }
+
+  aniadirExp(modo:string,id:number){
+    const body = {
+      modo:modo,
+      id:id
+    }
+    return this.http.post('http://localhost/tfgPokemon/aniadirExp.php',body);
   }
   
 

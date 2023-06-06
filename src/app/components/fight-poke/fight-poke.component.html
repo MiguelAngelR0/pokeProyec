@@ -1,0 +1,118 @@
+<div *ngIf="pokemon && pokemonE; else cargando">
+    <div class="container">
+        <ng-container *ngIf="pokemonBattle.stats.hp>0 && pokemonBattleEnemy.stats.hp>0; else terminaBatalla">
+        <div class="row">
+            <div class="col d-flex justify-content-center flex-column align-items-center">
+                <img class="w-50" src="{{this.pokemon.sprites.back_default}}" alt="">
+
+                <ng-container *ngIf="this.pokemonBattle">
+                    <p>{{this.pokemonBattle.nombre}}</p>
+                    {{ pokemonBattle.stats.hp }}
+                    <div class="vida-container">
+                        <div class="vida-bar" [style.width]="calcularPorcentajeVida(pokemonBattle.stats.hp)" [ngStyle]="{'background-color': pokemonBattle.stats.hp <= (0.3 * MAX_HP!) ? 'red' : '#4caf50'}"></div>
+                    </div>
+                </ng-container>
+
+
+            </div>
+            <!-- Pokemon Rival -->
+            <div class="col d-flex justify-content-center flex-column align-items-center">
+
+                <img class="w-50" [src]="pokemonE.sprites.front_default" alt="Pokemon Sprite">
+
+                <ng-container *ngIf="this.pokemonBattleEnemy">
+
+                    <p>{{this.pokemonBattleEnemy.nombre}}</p>
+                    {{ pokemonBattleEnemy.stats.hp }}
+
+                    <div class="vida-container">
+                        <div class="vida-bar" [style.width]="calcularPorcentajeVidaE(pokemonBattleEnemy.stats.hp)" [ngStyle]="{'background-color': pokemonBattleEnemy.stats.hp <= (0.3 * MAX_HP!) ? 'red' : '#4caf50'}"></div>
+                    </div>
+                    
+                </ng-container>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <ng-container *ngIf="mostrarAtaques">
+                    <button mat-mini-fab color="primary" (click)="volver()"><mat-icon>arrow_back</mat-icon></button>
+                </ng-container>
+            </div>
+        </div>
+        <div class="row">
+            <ng-container *ngIf=""></ng-container>
+            <div class="col">
+                <div>
+                    <h5>Ataques:</h5>
+                    <p>{{ mensajeAtaque }}</p>
+                </div>
+
+                <div>
+                    <h5>Ataques del enemigo:</h5>
+                    <p>{{ mensajeAtaqueEnemigo }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+            <!-- utilizando la clase pokemonBattle -->
+            <!-- todo hacer logica de tipos de ataque -->
+
+            <div class="ataques m-3 d-flex flex-wrap justify-content-between">
+                <ng-container *ngIf="this.pokemonBattleEnemy">
+
+                    <ng-container *ngFor="let atack of this.pokemonBattle?.ataques; let i=index">
+
+                        <!-- todo imprimir boton para ir hacia atras-->
+                        <ng-container *ngIf="mostrarAtaques">
+
+                            <button class="col-md-6 col-lg-6 d-flex flex-column align-items-center"
+                                (click)="atacar(atack)" *ngIf="i < 4">
+                                <h5>{{ atack.name}}</h5>
+                                <p>Poder: {{ atack.power }} </p>
+                                <p>PP: {{ atack.pp }} </p>
+                                <p>Acuarancy: {{ atack.accuracy }}</p>
+                            </button>
+                        </ng-container>
+
+                    </ng-container>
+                </ng-container>
+
+            </div>
+
+
+        </div>
+        <div class="row">
+            <!--todo crear panel de control dinamico -->
+            <ng-container *ngIf="!mostrarAtaques">
+                <div class="col d-flex flex-column m-3">
+
+                    <button mat-raised-button color="primary" class="m-3" (click)="realizarBatalla()">Atacar</button>
+                    <button mat-raised-button color="primary" class="m-3" (click)="usarPocion()">Usar Poción</button>
+                </div>
+                <div class="col d-flex flex-column m-3">
+                    <button mat-raised-button color="primary" class="m-3" (click)="huir()">Huir</button>
+                    <button mat-raised-button color="primary" class="m-3">Detalles</button>
+                </div>
+            </ng-container>
+        </div>
+    </ng-container>
+    <ng-template #terminaBatalla>
+        <ng-container *ngIf="pokemonBattle.stats.hp<=0; else ganas">
+            <h1>Perdiste</h1>
+            <button mat-raised-button color="primary" class="m-3" (click)="huir()">Volver a las batallas pokemons</button>
+        </ng-container>
+        <ng-template #ganas>
+            <h1>Ganaste</h1>
+            <button mat-raised-button color="primary" class="m-3" (click)="huir()">Volver a las batallas pokemons</button>
+        </ng-template>
+    </ng-template>
+    </div>
+
+    
+
+</div>
+<ng-template #cargando>
+    <h1>Cargando...</h1>
+</ng-template>

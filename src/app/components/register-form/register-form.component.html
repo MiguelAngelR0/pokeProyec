@@ -57,18 +57,27 @@
             <!-- Confirm Password  -->
             <mat-form-field class="d-flex">
                 <mat-label>ConfirmPass</mat-label>
-                <input type="password" matInput placeholder="ConfirmPassword" name="confirmPassword" formControlName="confirmPassword">
+                <input type="password" matInput placeholder="ConfirmPassword" name="confirmPassword"
+                    formControlName="confirmPassword">
 
                 <mat-error *ngIf="confirmPassword?.errors?.['required'] && confirmPassword?.touched">
                     El campo Confirm Password es obligatorio
                 </mat-error>
-              
+
+                <mat-error *ngIf="registerForm.errors?.['passwordsNotMatch']">
+                    Las contraseñas no coincidennnnn
+                </mat-error>
+
+
             </mat-form-field>
 
 
-            
+
             <div class="d-flex justify-content-between">
-                <button class="w-25" type="submit" mat-raised-button color="accent" [disabled]="registerForm.invalid">Crear cuenta</button>
+                <button class="w-25" type="submit" mat-raised-button color="accent"
+                    [disabled]="registerForm.invalid">Crear cuenta</button>
+                <button class="w-25" type="submit" mat-raised-button color="accent"
+                    [routerLink]="['/login']">Login</button>
             </div>
 
         </form>

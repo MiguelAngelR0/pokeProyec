@@ -1,0 +1,14 @@
+:host {
+  background-image: url("../../../assets/img/pokemonPurpleMovil.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.image {
+  background-image: url("../../../assets/img/pokemonPurpleMovil.jpg");
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}/*# sourceMappingURL=loginWall.component.css.map */

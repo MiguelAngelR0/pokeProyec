@@ -1,0 +1,36 @@
+<div class="container">
+    <h1>Página de contactos con chat que irá cambiando al seleccionar un contacto</h1>
+    <div class="row mt-5">
+        <h2> Lista de contactos favoritos</h2> 
+        
+    </div>
+    <div class="row mt-5">
+        <div class="col">
+            <div class="row">
+                <h2>Lista de contactos</h2>
+            </div>
+
+
+            <div class="row">
+              
+                <div class="contactos-container align-self-center">
+                  
+                    <div class="m-4 d-flex align-items-center justify-content-between" matTooltipPosition="left" matTooltip="{{user?.name}}" *ngFor="let user of users">
+                        <div class="col-4"> {{user?.email}}</div>
+                        
+                        <button class="col-1" mat-icon-button (click)="detalleContacto(user)"><mat-icon>person_add</mat-icon></button>
+
+                        <button class="col-1" mat-icon-button (click)="selectUser(user)"><mat-icon >message</mat-icon></button>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+        <div class="col columnaContactos">
+            <h2>Chat para el contacto: {{selectedUser?.name}}</h2>
+            <app-chat [selectedUser]="selectedUser"></app-chat>
+        </div>
+    </div>
+</div>

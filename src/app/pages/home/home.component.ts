@@ -23,6 +23,8 @@ export class HomeComponent implements OnInit {
     // Obtener la cadena JSON del almacenamiento sessionStorage
     const userStr = sessionStorage.getItem('user');
 
+    
+
     // Convertir la cadena JSON en un objeto de JavaScript
     this.user = JSON.parse(userStr ?? '');
 
@@ -30,14 +32,14 @@ export class HomeComponent implements OnInit {
 
     if (this.user) {
     
-      this.authService.getPokeFav(1).subscribe(
+      this.authService.getPokeFav(this.user.id).subscribe(
         (pokemons) => {
           console.log("Esto es lo que me llega de la respuesta getPokeFav")
           
 
           this.pokemonsFav = pokemons;
 
-          //paso la lista de pokemons favoritos a la pagina pokedex por sessionStorage
+          //paso la lista de pokemons favoritos a la pagina pokedex por sessionStorage, PERO NO ME LA DEVUELVE ERROR QUE AVECES CAMBIA Y OTRAS NO 
           sessionStorage.setItem("pokemonsFav",JSON.stringify(this.pokemonsFav));
 
         },
@@ -53,41 +55,18 @@ export class HomeComponent implements OnInit {
 
   //crea al pokemon en la base de datos y lo relaciona en la tabla de relacion, obtener el id del usuario al que se le va a agregar el pokemon
   toggleFavorite(pokemon: Pokemon): void {
-    console.log(pokemon)
-    // pokemon.favorite = !pokemon.favorite;
-
-    if (pokemon.favorite == true) {//es un pokemon favorito
-      console.log("fevorito?" + pokemon.favorite)
-      console.log("id?" + pokemon.id)
-      console.log("id?" + pokemon.pic)
-      console.log("id?" + pokemon.name)
-
-      if (this.user) {
-        
-        this.authService.addPokeFav(pokemon.id, pokemon.name, pokemon.pic, 1).subscribe(
-          (response) => {
-            console.log("aniadido a favoritos" + response)
-
-          },
-          (error) => { console.log("NO lo esta " + error) }
-        )
-
-      }
-
-    } else { 
-      if (this.user) {
-        this.authService.deletePokeFav(pokemon.id, pokemon.name, pokemon.pic, 1).subscribe(
-          (response) => {
-            console.log("borrado de favoritos" + response)
-
-
-          },
-          (error) => { console.log("NO lo esta " + error) }
-        )
-      }
+    console.log(pokemon);
+  
+    if (this.user) {
+      this.authService.deletePokeFav(pokemon.id, pokemon.name, pokemon.pic, this.user.id).subscribe(
+        (response) => {
+          console.log("borrado de favoritos" + response);
+          // Remove the Pokémon from the pokemonsFav array
+          this.pokemonsFav = this.pokemonsFav.filter((pf: any) => pf.id !== pokemon.id);
+        },
+        (error) => { console.log("NO esta borrado" + error) }
+      );
     }
-
-
   }
 
 
