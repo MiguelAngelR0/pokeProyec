@@ -12,14 +12,6 @@ export class PokemonBattle {
         this.stats=stats;
     }
 
-    reducirVida(danio: number) {
-
-    }
-
-    reducirAtaquesRestantes() {
-
-    }
-
 
 }
 

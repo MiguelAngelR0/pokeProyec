@@ -11,7 +11,7 @@ export class RegisterFormComponent implements OnInit {
 
   registerForm: FormGroup = new FormGroup({});
 
-  @Output() registerAction: EventEmitter<unknown> = new EventEmitter<unknown>();//emitimos el obj=los valores de nuestro formulario ponia any envez de unkown
+  @Output() registerAction: EventEmitter<unknown> = new EventEmitter<unknown>();//emitimos el obj
 
   constructor(private formBuilder: FormBuilder) {
     
@@ -46,7 +46,6 @@ export class RegisterFormComponent implements OnInit {
     
   
   }
-  
 
 
   get firstName() {

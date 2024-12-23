@@ -2,7 +2,7 @@
 import { Component, OnInit,Output,EventEmitter } from '@angular/core';
 
 //importamos lo necesario para construir el formulario
-import { FormGroup, FormBuilder,Validators, NgForm } from '@angular/forms';
+import { FormGroup, FormBuilder,Validators } from '@angular/forms';
 import { AuthServicePhp } from 'src/app/services/auth-service-php.service';
 
 
@@ -15,11 +15,9 @@ import { AuthServicePhp } from 'src/app/services/auth-service-php.service';
 
 export class LoginFormComponent implements OnInit {
 
-  
+  loginForm: FormGroup = new FormGroup({})//se trata al login como un objeto
 
-  loginForm: FormGroup = new FormGroup({})//se trata al login como un obj
-
-  @Output() loginAction: EventEmitter<unknown> = new EventEmitter<unknown>();//emitimos el obj=los valores de nuestro formulario ponia any envez de unkown
+  @Output() loginAction: EventEmitter<unknown> = new EventEmitter<unknown>();//emitimos el obj. 
 
   constructor(private formBuilder: FormBuilder, private authService: AuthServicePhp) {}
 
@@ -30,36 +28,23 @@ export class LoginFormComponent implements OnInit {
       password: ['', Validators.required]
     });
     
-    if(sessionStorage.getItem('token')){
-
-    }
-
   }
-
   get email(){
     return this.loginForm.get('email')
   }
-
   get password(){
     return this.loginForm.get('password')
   }
-
-
   submitLogin(){
-    console.log(this.loginForm.valid)
-    
     if(this.loginForm.valid){
-      console.table(this.loginForm.value)
-      
-      //todo peticion a authService
       this.loginAction.emit(this.loginForm.value);//Este es el valor que va a recibirse como evento en el loginAction
-
       this.authService.login(this.loginForm.value.email,this.loginForm.value.password).subscribe(
         (response) => {
-          
+          console.log("respuesta del login: ", response)
         },
         (error) => {
           // hacer algo con el error del servicio si es necesario
+          console.error("error login" , error)
         }
       );
      

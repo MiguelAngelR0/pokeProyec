@@ -11,3 +11,4 @@ import {MatButtonModule} from '@angular/material/button';
   ],exports: [FightPokeComponent]
 })
 export class FightPokeModule { }
+              

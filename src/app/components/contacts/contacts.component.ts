@@ -42,7 +42,7 @@ export class ContactsComponent implements OnInit {
 
   public selectUser(user: any): void {
     this.selectedUser = user;
-    this.selectedUserChat.emit(this.selectedUser); //Notificamos al componente superior la tarea a eliminar
+    this.selectedUserChat.emit(this.selectedUser); 
   }
 
   detalleContacto(user:IUser){

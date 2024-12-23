@@ -37,7 +37,7 @@ const routes: Routes = [
         path: 'battle',
         loadChildren: () => import('../../pages/ruta-page/ruta-page.module').then(m => m.RutaPageModule),
       },
-      {//todo hacer que esta se la pantalla donde se acceda atraves del id del pokemon al que selecciones en la ruta
+      {
         path: 'battle/:id/:idE/:modo',
         loadChildren: () => import('../../pages/battle-poke-page/battle-poke-page.module').then(m => m.BattlePokePageModule),
       },

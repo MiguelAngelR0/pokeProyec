@@ -17,8 +17,6 @@ export class LoginPageComponent {
 
   ngOnInit(): void {
 
-    
-
     //Si ya esta el token logueado carga la home
     const token = sessionStorage.getItem('token');
 
@@ -27,8 +25,6 @@ export class LoginPageComponent {
     }
 
   }
-
-
 
 
 
@@ -44,7 +40,7 @@ export class LoginPageComponent {
         
         sessionStorage.setItem("user",JSON.stringify(this.user));
 
-        if(response.exito || response.token){ //permite a dashboard acceder sin login al tener ya el login 
+        if(response.exito || response.token){ //permite al dashboard acceder sin login al tener ya el login 
           sessionStorage.setItem('token', response.token);
           this.router.navigate(['/dashboard']);
           

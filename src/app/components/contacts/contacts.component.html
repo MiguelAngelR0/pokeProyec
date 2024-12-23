@@ -18,7 +18,7 @@
                     <div class="m-4 d-flex align-items-center justify-content-between" matTooltipPosition="left" matTooltip="{{user?.name}}" *ngFor="let user of users">
                         <div class="col-4"> {{user?.email}}</div>
                         
-                        <button class="col-1" mat-icon-button (click)="detalleContacto(user)"><mat-icon>person_add</mat-icon></button>
+                        <button class="col-1" mat-icon-button (click)="detalleContacto(user)"><mat-icon>person_pin</mat-icon></button>
 
                         <button class="col-1" mat-icon-button (click)="selectUser(user)"><mat-icon >message</mat-icon></button>
                     </div>

@@ -27,12 +27,8 @@ export class PokedexComponent implements AfterViewInit {
   public pokemons: Pokemon[] = [];
   public pokemonsFav: Pokemon[] = [];
 
-
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-
-  //otro metodo para pasar el id por Output
-  //@Output() seleccionado = new EventEmitter<number>()
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -46,43 +42,26 @@ export class PokedexComponent implements AfterViewInit {
 
   ngOnInit(): void {
 
-
-    //*Obtencion del usuario***************
-
     // Obtener la cadena JSON del almacenamiento sessionStorage
     const userStr = sessionStorage.getItem('user');
 
     // Convertir la cadena JSON en un objeto de JavaScript
     this.user = JSON.parse(userStr ?? '');
-    console.log("este es mi usu",userStr)
-    console.log("hay usuario", this.user?.id)
-
-    //* Obtencion de sus pokemons favoritos************
-
-    // Obtener la cadena JSON del almacenamiento sessionStorage
-
-
+  
     // Convertir la cadena JSON en un objeto de JavaScript(hay que comprobar si es null antes de guardarla)
     const pokemonsFavString = sessionStorage.getItem('pokemonsFav');
     this.pokemonsFav = pokemonsFavString ? JSON.parse(pokemonsFavString) : [];
-
-    console.log("hay pokemons Fav", this.pokemonsFav)
-
 
 
     this.pokemonService.getAllPokemons()
       .subscribe(pokemons => {
 
-        console.table(pokemons)
-        console.table(this.pokemonsFav)
+     
         if (this.pokemonsFav.length == 0) {
 
           this.dataSource = new MatTableDataSource<Pokemon>(pokemons);
           this.dataSource.paginator = this.paginator;
         } else {
-          //tengo que modificar el array de pokemons en la posicion donde tenga un pokemon favorito
-          console.log("hay pokemons favoritos")
-
           // Recorrer los pokemons
           for (let i = 0; i < pokemons.length; i++) {
             const pokemon = pokemons[i];
@@ -124,33 +103,29 @@ export class PokedexComponent implements AfterViewInit {
     this.router.navigateByUrl(`/dashboard/pokedetail/${id}`);
   }
 
-  //crea al pokemon en la base de datos y lo relaciona en la tabla de relacion, obtener el id del usuario al que se le va a agregar el pokemon
+  
   toggleFavorite(pokemon: Pokemon): void {
 
     pokemon.favorite = !pokemon.favorite;
 
-    if (pokemon.favorite == true) {//es un pokemon favorito
-      console.log("fevorito?" + pokemon.favorite)
+    if (pokemon.favorite == true) {
+      
      
       if (this.user) {
         this.userFav.addPokeFav(pokemon.id, pokemon.name, pokemon.pic, this.user.id).subscribe(
           (response) => {
             console.log("aniadido a favoritos" + response)
-
-
           },
           (error) => { console.log("NO lo esta " + error) }
         )
 
       }
 
-    } else { //quitar de las dos tablas el pokemon
+    } else { 
       if (this.user) {
         this.userFav.deletePokeFav(pokemon.id, pokemon.name, pokemon.pic, this.user.id).subscribe(
           (response) => {
             console.log("borrado de favoritos" + response)
-
-
           },
           (error) => { console.log("NO lo esta " + error) }
         )

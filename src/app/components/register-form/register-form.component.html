@@ -23,7 +23,7 @@
                 <mat-label>Nombre</mat-label>
                 <input class="d-flex" name="firstName" matInput placeholder="Nombre" formControlName="firstName">
                 <mat-error *ngIf="firstName?.errors?.['required'] && firstName?.touched">
-                    El campo Nombre es obligatorio
+                    El campo nombre es obligatorio
                 </mat-error>
 
             </mat-form-field>
@@ -65,7 +65,7 @@
                 </mat-error>
 
                 <mat-error *ngIf="registerForm.errors?.['passwordsNotMatch']">
-                    Las contraseñas no coincidennnnn
+                    Las contraseñas no coinciden
                 </mat-error>
 
 

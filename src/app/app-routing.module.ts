@@ -30,11 +30,10 @@ const routes: Routes = [
   },
  {
     path: '**',
-    // pathMatch: 'full',
     redirectTo: 'not-found'
   },
   {
-    path: 'not-found',//Si la ryta no coincide con ninguna de estas
+    path: 'not-found',//Si la ruta no coincide con ninguna de estas
     component: NotFoundPageComponent
   }
 

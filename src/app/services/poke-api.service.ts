@@ -10,7 +10,7 @@ import { Observable, map } from 'rxjs';
 
 export class PokeApiService {
 
-  //corto la ultima barra para poder utilizarla despues
+  
   
   private url:string ='https://pokeapi.co/api/v2'
 

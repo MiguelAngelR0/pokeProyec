@@ -25,9 +25,6 @@ export class RegisterPageComponent {
         if(response){
           this.router.navigate(['/login']);
         }
-        
-        
-        
 
       },
       (error) => (console.error(`Ha habido un error al hacer login:`, JSON.stringify(error, null, 2)),

@@ -14,12 +14,7 @@ export class AuthGuardGuard implements CanActivate {
   //recuperar los datos JSON y pasarlos
   ngOnInit(): void {
 
-
-
   }
-
-
-
 
   constructor(private router: Router){}
   
@@ -33,8 +28,6 @@ const userStr = sessionStorage.getItem('user');
 // Convertir la cadena JSON en un objeto de JavaScript
  this.user = JSON.parse(userStr ?? '');
 
-
-     
       console.log("este es el token" + this.user?.token)
   if (this.user?.token) {
     // Si el token existe, el usuario está autenticado

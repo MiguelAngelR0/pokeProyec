@@ -55,16 +55,12 @@
             </div>
         </div>
         <div class="row">
-
-            <!-- utilizando la clase pokemonBattle -->
-            <!-- todo hacer logica de tipos de ataque -->
-
             <div class="ataques m-3 d-flex flex-wrap justify-content-between">
                 <ng-container *ngIf="this.pokemonBattleEnemy">
 
                     <ng-container *ngFor="let atack of this.pokemonBattle?.ataques; let i=index">
 
-                        <!-- todo imprimir boton para ir hacia atras-->
+                        
                         <ng-container *ngIf="mostrarAtaques">
 
                             <button class="col-md-6 col-lg-6 d-flex flex-column align-items-center"
@@ -84,7 +80,7 @@
 
         </div>
         <div class="row">
-            <!--todo crear panel de control dinamico -->
+            
             <ng-container *ngIf="!mostrarAtaques">
                 <div class="col d-flex flex-column m-3">
 

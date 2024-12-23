@@ -40,7 +40,7 @@ export class FightPokeComponent implements OnInit {
   mostrarAtaques: boolean = false;
   mostrarPociones: boolean = false;
 
-  // Dentro de tu clase FightPokeComponent
+  
   mensajeAtaque: string = '';
   mensajeAtaqueEnemigo: string = '';
 
@@ -56,7 +56,7 @@ export class FightPokeComponent implements OnInit {
 
    
     const userStr = sessionStorage.getItem('user');
-    // Convertir la cadena JSON en un objeto de JavaScript
+    // Convertir la cadena JSON en un objeto
     this.user = JSON.parse(userStr ?? '');
 
     console.log("hay usuario", this.user)
@@ -101,21 +101,16 @@ export class FightPokeComponent implements OnInit {
           // console.log('move', this.ataquesE[index]);
           i++;
         }
-        console.log("pokemon Rival", this.pokemonE)
-        console.log("pokemon tuyo", this.pokemon);
-        //*pokemon para la batalla
+       
+        
         //ataques this.ataques
         const statBattle = new Stat(this.pokemon?.stats[0].base_stat, this.pokemon?.stats[1].base_stat, this.pokemon?.stats[2].base_stat, this.pokemon?.stats[3].base_stat, this.pokemon?.stats[4].base_stat, this.pokemon?.stats[5].base_stat)
 
         this.pokemonBattle = new PokemonBattle(this.pokemon.name, this.ataques, statBattle)
 
-        //*Pokemon otro pokemon
+        
         const statBattleEnemy = new Stat(this.pokemonE?.stats[0].base_stat, this.pokemonE?.stats[1].base_stat, this.pokemonE?.stats[2].base_stat, this.pokemonE?.stats[3].base_stat, this.pokemonE?.stats[4].base_stat, this.pokemonE?.stats[5].base_stat)
         this.pokemonBattleEnemy = new PokemonBattle(this.pokemonE.name, this.ataquesE, statBattleEnemy)
-
-        console.log(this.pokemonBattle)
-        console.log(this.pokemonBattleEnemy)
-
       }
     )
 
@@ -123,48 +118,35 @@ export class FightPokeComponent implements OnInit {
   }
 
 
-  //todo convertir en metodo realizarBatalla
+  
   atacar(atack: Ataque) {
 
     if (atack && atack.power) {
       atack.pp--;
-      //*aplicar danio
-
       this.pokemonBattleEnemy.stats.hp = this.pokemonBattleEnemy.stats.hp - this.damage(1, this.pokemonBattle.stats.attack, atack.power, this.pokemonBattleEnemy.stats.defense);
       if (this.pokemonBattleEnemy.stats.hp <= 0) {
         console.log('¡Has ganado la batalla!');
         this.ganas()
       }
-  
       this.mensajeAtaque = `¡Has atacado con ${atack.name} y has infligido ${this.damage(1, this.pokemonBattle.stats.attack, atack.power, this.pokemonBattleEnemy.stats.defense)} puntos de daño!`;
-
     }
-
     this.devolverAtaque();
-
   }
-
-
   devolverAtaque() {
-
     const randomAttackIndex = Math.floor(Math.random() * this.pokemonBattleEnemy.ataques.length);
-
     console.log(this.pokemonBattleEnemy.ataques[randomAttackIndex].name, this.pokemonBattleEnemy.ataques[randomAttackIndex].power)
-    //todo ver si el ataque es de danio especial o de danio normal
     this.pokemonBattle.stats.hp = this.pokemonBattle.stats.hp - this.damage(1, this.pokemonBattleEnemy.stats.attack, this.pokemonBattleEnemy.ataques[randomAttackIndex].power, this.pokemonBattleEnemy.stats.defense);
     this.mensajeAtaqueEnemigo = `¡Ha atacado con ${this.pokemonBattleEnemy.ataques[randomAttackIndex].name} y has infligido ${this.damage(1, this.pokemonBattleEnemy.stats.attack, this.pokemonBattleEnemy.ataques[randomAttackIndex].power, this.pokemonBattleEnemy.stats.defense)} puntos de daño!`;
   }
-
   damage(attackerLevel: number, attackPower: number, attackerAttack: number, defenderDefense: number): number {
     const levelFactor = (2 * attackerLevel / 5) + 2;
     const attackFactor = attackerAttack;
     const defenseFactor = defenderDefense;
     const basePower = attackPower;
-
     const damage = Math.floor(((levelFactor * attackFactor * basePower) / defenseFactor) / 50) + 2;
-
     return damage;
   }
+
 
 
   volver() {
@@ -175,36 +157,32 @@ export class FightPokeComponent implements OnInit {
     
     this.mostrarAtaques = true;
 
-    // Verificar si el pokemonBattleEnemy ha sido derrotado
     if (this.pokemonBattleEnemy.stats.hp <= 0) {
       console.log('¡Has ganado la batalla!');
       this.ganas()
-      // Aquí puedes agregar lógica adicional, como mostrar un mensaje al jugador, etc.
+      
       return;
     }
 
-    // Verificar si el pokemonBattle ha sido derrotado
+    
     if (this.pokemonBattle.stats.hp <= 0) {
       console.log('¡Has sido derrotado!');
-      // Aquí puedes agregar lógica adicional, como mostrar un mensaje al jugador, etc.
+      
       return;
     }
 
-    // Continuar la batalla (puedes llamar a este método nuevamente para el siguiente turno)
+   
   }
 
 
-  //*boton de huir
+  
+
   huir() {
     this.router.navigate(['/dashboard/battle/']);
   }
-  //*Ganas
-  ganas() { //llmar al servicio para que sume la exp 
+  
+  ganas() {  
 
-
-    console.log("modo en el que has ganado ", this.modo)
-    console.log("user id ", this.user!.id)
-    
     this.authService.aniadirExp(this.modo, this.user!.id).subscribe(
       (respuesta) => {
         console.log("Esto es lo que me llega de la respuesta", respuesta)
@@ -213,37 +191,24 @@ export class FightPokeComponent implements OnInit {
         (console.error(`Ha habido un error: `, JSON.stringify(error, null, 2)))
       }
     );
-
-
   }
 
-
-
-  //*boton de pociones
-  usarPocion() {
+  usarPocion() {  
 
   }
-
-
 
   detallesAtaque(nombreA: string) {
     return this.pokemonService.getByIdMove(nombreA)
-
-
   }
 
 
 
 
   calcularPorcentajeVida(hp: number): string {
-    // Vida máxima del Pokémon (ajusta este valor según tus necesidades)
-
-    const porcentaje = (hp * 100); // Calcula el porcentaje de vida
+    
+    const porcentaje = (hp * 100);
 
     let porcentajeFalta = porcentaje / this.MAX_HP!
-
-
-
 
     const progressBarWidth = `${porcentajeFalta}%`;
 
@@ -252,9 +217,9 @@ export class FightPokeComponent implements OnInit {
   }
 
   calcularPorcentajeVidaE(hp: number): string {
-    // Vida máxima del Pokémon (ajusta este valor según tus necesidades)
+    
 
-    const porcentaje = (hp * 100); // Calcula el porcentaje de vida
+    const porcentaje = (hp * 100);
 
     let porcentajeFalta = porcentaje / this.MAX_HPE!
 
