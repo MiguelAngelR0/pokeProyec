@@ -1,0 +1,3 @@
+[submodule "pokeproyec"]
+    path = pokeproyec
+    url = https://github.com/MiguelAngelR0/pokeproyec.git
